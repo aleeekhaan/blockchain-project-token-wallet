@@ -1,0 +1,80 @@
+<div>
+    <mat-card>
+        <mat-card-title>
+            <div>Welcome {{ user.name }},</div>
+            <br>
+            <div>Current Balance : {{ user.balance }}</div>
+            <br>
+        </mat-card-title>
+        <mat-card-header></mat-card-header>
+
+        <mat-expansion-panel>
+            <mat-expansion-panel-header>
+              <mat-panel-title>
+                Deposit
+              </mat-panel-title>
+              <mat-panel-description>
+                Enter the amount you want to deposit.
+              </mat-panel-description>
+            </mat-expansion-panel-header>
+        
+            <div>
+                <mat-form-field>
+                    <mat-label>Amount</mat-label>
+                    <input matInput type="number" [(ngModel)]="deposit.amount">
+                    </mat-form-field>
+
+                    <button mat-button color="primary" (click)="depositAmount()">Deposit</button>
+            </div>
+        
+          </mat-expansion-panel>
+
+          <mat-expansion-panel>
+            <mat-expansion-panel-header>
+              <mat-panel-title>
+                Transfer
+              </mat-panel-title>
+              <mat-panel-description>
+                Enter the amount you want to transfer.
+              </mat-panel-description>
+            </mat-expansion-panel-header>
+        
+            <div>
+                <mat-form-field>
+                    <mat-label>To</mat-label>
+                    <input matInput type="text" [(ngModel)]="transfer.to">
+                    </mat-form-field>
+
+                    <mat-form-field>
+                        <mat-label>Amount</mat-label>
+                        <input matInput type="number" [(ngModel)]="transfer.amount">
+                        </mat-form-field>
+    
+
+                    <button mat-button color="primary" (click)="transferAmount()">Transfer</button>
+            </div>
+        
+          </mat-expansion-panel>
+
+          <mat-expansion-panel>
+            <mat-expansion-panel-header>
+              <mat-panel-title>
+                Withdraw
+              </mat-panel-title>
+              <mat-panel-description>
+                Enter the amount you want to withdraw.
+              </mat-panel-description>
+            </mat-expansion-panel-header>
+        
+            <div>
+                <mat-form-field>
+                    <mat-label>Amount</mat-label>
+                    <input matInput type="number" [(ngModel)]="withdraw.amount">
+                    </mat-form-field>
+
+                    <button mat-button color="primary" (click)="withdrawAmount()">Withdraw</button>
+            </div>
+        
+          </mat-expansion-panel>
+    </mat-card>
+</div>

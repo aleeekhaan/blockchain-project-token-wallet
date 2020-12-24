@@ -9,9 +9,10 @@ router.post('/register', async (req, res)=> {
     res.send(reg)
 })
 
-router.post('/authenticate', async (req, res) => {
+router.post('/login', async (req, res) => {
     const {email, password} = req.body;
     try {
+        // console.log(req.body)
         const contract = await networkUtils.connectToFabric(email);
         const walletAccBytes = await contract.submitTransaction("getWalletAccount");
         const walletAcc = JSON.parse(walletAccBytes.toString());
@@ -19,19 +20,12 @@ router.post('/authenticate', async (req, res) => {
         const comparison = await bcrypt.compare(password, pass);
 
         if(comparison) {
-            const wallet = await networkUtils.getWallet("Org1");
-            const id = await wallet.get("org1Admin");
-            const adminCert = id.credentials.certificate;
-            const token = jwt.sign({walletAcc}, adminCert,{ expiresIn : 604800 });
-
             const clientWallet = {
                 "success" : true,
-                "token" : "JWT "+token,
                 "clientWalletAccount" : {
                     "clientId" : walletAcc.clientId,
                     "email" : walletAcc.email,
-                    "fname" : walletAcc.fname,
-                    "lname" : walletAcc.lname,
+                    "name" : walletAcc.fname+" "+walletAcc.lname
                 }
             }
 

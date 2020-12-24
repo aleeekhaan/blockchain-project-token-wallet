@@ -8,6 +8,7 @@ const adminEmail = "admin@org1.com"
 router.post('/deposit', async (req, res) => {
     try {
         const { email, amount } = req.body
+        console.log(req.body)
         const contract = await networkUtils.connectToFabric("org1Admin");
         let mint = await contract.submitTransaction("Mint", amount);
         if (mint) {
@@ -62,7 +63,7 @@ router.post('/transfer', async (req, res)=>{
     }
 })
 
-router.get('/accountBalance', async (req, res)=>{
+router.post('/accountBalance', async (req, res)=>{
     const { email } = req.body;
     try {
         const contract = await networkUtils.connectToFabric(email);
@@ -75,7 +76,7 @@ router.get('/accountBalance', async (req, res)=>{
     }
 })
 
-router.get('/history', async (req, res) => {
+router.post('/history', async (req, res) => {
     let email = req.body.email;
     try {
         let contract = await networkUtils.connectToFabric(email);
